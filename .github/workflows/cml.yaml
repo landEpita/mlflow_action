@@ -17,9 +17,10 @@ jobs:
 
           # Write your CML report
           echo "# Models metrics" >> report.md
-          cat results.txt >> report.md
+          cat metrics.txt >> report.md
           
           # Image
-          cml-publish image.png --md >> report.mdr
+          cml-publish feature_importance.png --md >> report.mdr
+          cml-publish residuals.png --md >> report.mdr
           
           cml-send-comment report.md
