@@ -37,7 +37,7 @@ test_score = regr.score(X_test, y_test) * 100
 
 # Mlflow 
 mlflow.log_param("max_depth", max_depth)
-mlflow.log_param("random_state", random_state)
+mlflow.log_param("random_state", seed)
 mlflow.log_metric("train_score", train_score)
 mlflow.log_metric("test_score", test_score)
 mlflow.sklearn.log_model(regr, "model")
