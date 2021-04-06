@@ -4,8 +4,11 @@ from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+
+import mlflow
 # Set random seed
 seed = 42
+max_depth = 2
 
 ################################
 ########## DATA PREP ###########
@@ -23,13 +26,21 @@ X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random
 #################################
 
 # Fit a model on the train section
-regr = RandomForestRegressor(max_depth=2, random_state=seed)
+regr = RandomForestRegressor(max_depth=max_depth, random_state=seed)
 regr.fit(X_train, y_train)
+
 
 # Report training set score
 train_score = regr.score(X_train, y_train) * 100
 # Report test set score
 test_score = regr.score(X_test, y_test) * 100
+
+# Mlflow 
+mlflow.log_param("max_depth", max_depth)
+mlflow.log_param("random_state", random_state)
+mlflow.log_metric("train_score", train_score)
+mlflow.log_metric("test_score", test_score)
+mlflow.sklearn.log_model(regr, "model")
 
 # Write scores to a file
 with open("metrics.txt", 'w') as outfile:
