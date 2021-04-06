@@ -20,7 +20,7 @@ jobs:
           cat metrics.txt >> report.md
           
           # Image
-          cml-publish feature_importance.png --md >> report.mdr
-          cml-publish residuals.png --md >> report.mdr
+          cml-publish feature_importance.png --md >> report.md
+          cml-publish residuals.png --md >> report.md
           
           cml-send-comment report.md
